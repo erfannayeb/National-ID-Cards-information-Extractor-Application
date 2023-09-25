@@ -1,0 +1,401 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Panel</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      header {
+        background-color: #1fbfbf; /* Tiffany Blue color */
+        color: white;
+        text-align: center;
+        padding: 1rem;
+    }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+      }
+
+      .search-container {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      .search-input {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      .search-btn {
+        background-color: #333;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 1rem;
+      }
+
+      .add-card-section,
+      .id-card-list {
+        width: 100%;
+      }
+
+      .add-card-section {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+      }
+
+      .add-card-section h3 {
+        margin-bottom: 1rem;
+      }
+
+      .add-card-section label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .add-card-section input[type="text"],
+      .add-card-section input[type="date"],
+      .add-card-section input[type="file"] {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      .add-card-section button {
+        background-color: #333;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .id-card-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .id-card {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+      }
+
+      .id-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 1.5rem;
+      }
+      .upload-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .upload-section button {
+        background-color: #333;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .navbar {
+        background-color: #1fbfbf; /* Tiffany Blue color */
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      .navbar-links {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .navbar-link {
+        text-decoration: none;
+        color: white;
+      }
+
+      .logout-button,
+      .change-password-button {
+        background-color: #333;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>ID Card Detector</h1>
+    </header>
+    <div class="navbar">
+      <ul class="navbar-links">
+        <li><a class="navbar-link" href="#">Home</a></li>
+        <li><a class="navbar-link" href="#">Dashboard</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <button class="change-password-button" id="changePasswordBtn">
+          Change Password
+        </button>
+        <button class="logout-button" id="logoutBtn">Log Out</button>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Welcome, User!</h2>
+      <div class="upload-section">
+        <h3>Upload New Image</h3>
+        <p>Click the button below to upload a new ID card image.</p>
+        <button class="upload-button" id="uploadImageBtn">Upload Image</button>
+      </div>
+      <div class="add-card-section">
+        <h3>Add a New ID Card</h3>
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" required />
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" required />
+
+        <label for="fatherName">Father Name</label>
+        <input type="text" id="fatherName" required />
+
+        <label for="birthDate">Birth Date</label>
+        <input type="date" id="birthDate" required />
+
+        <label for="expirationDate">Expiration Date</label>
+        <input type="date" id="expirationDate" required />
+
+        <label for="idNumber">ID Number</label>
+        <input type="text" id="idNumber" required />
+
+        <label for="photo">Photo</label>
+        <input type="file" id="photo" accept="image/*" required />
+
+        <button class="add-card-button" id="addCardBtn">Add Card</button>
+      </div>
+        <div class="search-container">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="Search ID cards"
+        />
+        <button class="search-btn" id="searchBtn">Search</button>
+      </div>
+      <ul class="id-card-list" id="idCardList">
+        <!-- ID card items will be added dynamically here -->
+      </ul>
+    </div>
+    <script>
+      const addCardButton = document.getElementById("addCardBtn");
+      const idCardList = document.getElementById("idCardList");
+      const photoInput = document.getElementById("photo");
+
+      addCardButton.addEventListener("click", function () {
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const fatherName = document.getElementById("fatherName").value;
+        const birthDate = document.getElementById("birthDate").value;
+        const expirationDate = document.getElementById("expirationDate").value;
+        const idNumber = document.getElementById("idNumber").value;
+
+        if (
+          !firstName ||
+          !lastName ||
+          !fatherName ||
+          !birthDate ||
+          !expirationDate ||
+          !idNumber
+        ) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        const file = photoInput.files[0];
+        if (!file) {
+          alert("Please select a photo.");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const photoURL = event.target.result;
+          const newCard = {
+            firstName,
+            lastName,
+            fatherName,
+            birthDate,
+            expirationDate,
+            idNumber,
+            photo: photoURL,
+          };
+
+          idCards.push(newCard);
+          renderIdCards(idCards);
+        };
+
+        reader.readAsDataURL(file);
+
+        document.getElementById("firstName").value = "";
+        document.getElementById("lastName").value = "";
+        document.getElementById("fatherName").value = "";
+        document.getElementById("birthDate").value = "";
+        document.getElementById("expirationDate").value = "";
+        document.getElementById("idNumber").value = "";
+
+        photoInput.value = "";
+      });
+      const uploadImageButton = document.getElementById("uploadImageBtn");
+
+      uploadImageButton.addEventListener("click", function () {
+        // Redirect to another web page for image upload
+        window.location.href = "/"; // Replace with your actual upload page URL
+      });
+      const searchButton = document.getElementById("searchBtn");
+
+      searchButton.addEventListener("click", () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredCards = idCards.filter(
+          (card) =>
+            card.firstName.toLowerCase().includes(searchTerm) ||
+            card.lastName.toLowerCase().includes(searchTerm) ||
+            card.idNumber.includes(searchTerm)
+        );
+        renderIdCards(filteredCards);
+      });
+
+      const logoutButton = document.getElementById("logoutBtn");
+
+          logoutButton.addEventListener("click", () => {
+        alert("Logged out successfully");
+        // Redirect to login page or perform any other necessary actions
+      });
+      // Define the array to store ID card data
+      const idCards = [];
+
+// Function to render ID cards
+function renderIdCards(cards) {
+    const idCardList = document.getElementById('idCardList');
+    idCardList.innerHTML = '';
+
+    cards.forEach(card => {
+        const cardItem = document.createElement('li');
+        cardItem.classList.add('id-card');
+
+        const cardImage = document.createElement('img');
+        cardImage.src = card.photo;
+        cardImage.alt = `${card.firstName} ${card.lastName}`;
+        cardImage.classList.add('id-card-img');
+
+        const cardInfo = document.createElement('div');
+        cardInfo.classList.add('id-card-info');
+
+        const name = document.createElement('h4');
+        name.textContent = `${card.firstName} ${card.lastName}`;
+
+        const idNumber = document.createElement('p');
+        idNumber.textContent = `ID: ${card.idNumber}`;
+
+        const birthDate = document.createElement('p');
+        birthDate.textContent = `Birth Date: ${card.birthDate}`;
+
+        const fatherName = document.createElement('p');
+        fatherName.textContent = `Father Name: ${card.fatherName}`;
+
+        const expirationDate = document.createElement('p');
+        expirationDate.textContent = `Expires on: ${card.expirationDate}`;
+
+        cardInfo.appendChild(name);
+        cardInfo.appendChild(idNumber);
+        cardInfo.appendChild(birthDate);
+        cardInfo.appendChild(fatherName);
+        cardInfo.appendChild(expirationDate);
+
+        cardItem.appendChild(cardImage);
+        cardItem.appendChild(cardInfo);
+
+        idCardList.appendChild(cardItem);
+    });
+}
+
+    // Function to handle form submission
+    function handleFormSubmission(event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const fatherName = document.getElementById('fatherName').value;
+        const birthDate = document.getElementById('birthDate').value;
+        const expirationDate = document.getElementById('expirationDate').value;
+        const idNumber = document.getElementById('idNumber').value;
+        const photo = 'https://example.com/photo.jpg'; // Replace with uploaded photo URL
+
+        const newCard = {
+            firstName,
+            lastName,
+            fatherName,
+            birthDate,
+            expirationDate,
+            idNumber,
+            photo
+        };
+
+        idCards.push(newCard);
+        renderIdCards(idCards);
+
+        // Clear the form fields
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('fatherName').value = '';
+        document.getElementById('birthDate').value = '';
+        document.getElementById('expirationDate').value = '';
+        document.getElementById('idNumber').value = '';
+    }
+
+    </script>
+  </body>
+</html>
